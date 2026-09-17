@@ -1,8 +1,36 @@
-import React from 'react'
+import { useState } from 'react';
 import Item from '../Components/MainContent/Item'
-import ItemCreator from '../Components/MainContent/Item'
+import { Tag, Calendar } from '../Components/Icons'
+import CoverImage from '../Components/MainContent/CoverImage';
 
 const MainContent = () => {
+    const [items, setItems] = useState([
+        { id: 1, type: 'p', content: 'Kìa chú là chú ếch con' },
+    ]);
+
+    const addItem = (afterId) => {
+        const newItem = { id: Date.now(), type: 'p', content: '' };
+        setItems((prev) => {
+            const index = prev.findIndex((i) => i.id === afterId);
+            const next = [...prev];
+            next.splice(index + 1, 0, newItem);
+            return next;
+        });
+        return newItem.id;
+    };
+
+    const deleteItem = (id) => {
+        setItems((prev) => prev.filter((i) => i.id !== id));
+    };
+
+    const updateItem = (id, newContent, newType) => {
+        setItems((prev) =>
+            prev.map((i) =>
+                i.id === id ? { ...i, content: newContent, type: newType } : i
+            )
+        );
+    }
+
     return (
         <main className="editor">
 
@@ -15,28 +43,18 @@ const MainContent = () => {
                 </div>
             </div>
 
-            <div className="cover-image">
-                <div className="cover-icon"></div>
-                <span className="add-comment">💬 Add comment</span>
-            </div>
+            {/* cover image */}
+            <CoverImage />
 
             <h1 className="note-title">Quarterly Product Strategy 2025</h1>
 
             <div className="metadata">
                 <div className="meta-row">
-                    <span className="meta-label">◎ Status</span>
-                    <span className="meta-value"><span className="badge status">In Progress</span></span>
-                </div>
-                <div className="meta-row">
-                    <span className="meta-label">⚑ Priority</span>
-                    <span className="meta-value"><span className="badge priority">High</span></span>
-                </div>
-                <div className="meta-row">
-                    <span className="meta-label">📅 Due Date</span>
+                    <span className="meta-label"><Calendar width="20px" height="20px" /> Due Date</span>
                     <span className="meta-value">Nov 15, 2025</span>
                 </div>
                 <div className="meta-row">
-                    <span className="meta-label">🏷 Tags</span>
+                    <span className="meta-label"><Tag width="20px" height="20px" /> Tags</span>
                     <span className="meta-value">
                         <span className="badge">Product</span>
                         <span className="badge">Strategy</span>
@@ -46,22 +64,18 @@ const MainContent = () => {
             </div>
 
             <div className="content">
-                <Item>Kìa chú là chú ếch con</Item>
-
-                <div className="callout">
-                    💡 <span><strong>Key Objective:</strong> Increase daily active writing time by 35% through frictionless inline editing, instantaneous search indexing, and unified cross-linking.</span>
-                </div>
-
-                <div className="todo-list">
-                    <label className="todo-item done">
-                        <input type="checkbox" checked />
-                        Finalize team resource allocation for Q3 deliverables
-                    </label>
-                    <label className="todo-item">
-                        <input type="checkbox" />
-                        Conduct user interviews on note organization &amp; hierarchy taxonomy
-                    </label>
-                </div>
+                {items.map((item) => (
+                    <Item
+                        key={item.id}
+                        id={item.id}
+                        type={item.type}
+                        content={item.content}
+                        onSave={updateItem}
+                        onEnter={addItem}
+                        onDeleteEmpty={deleteItem}
+                        addItem={addItem}
+                    />
+                ))}
             </div>
 
         </main>

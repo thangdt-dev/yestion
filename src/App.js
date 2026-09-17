@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Sidebar from './Layout/Sidebar';
 import MainContent from './Layout/MainContent';
+import ThemeToggle from './Components/Features/ThemeToggle ';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         {/* <!-- EDITOR --> */}
         <MainContent />
 
+        {/* Fixed */}
+        <ThemeToggle />
       </div>
     </div>
   );
