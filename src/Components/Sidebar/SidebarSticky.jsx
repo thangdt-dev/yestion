@@ -1,10 +1,18 @@
+import { createNote } from "../../utils/notesService"
 
-const SidebarSticky = () => {
+const SidebarSticky = ({ load, setLoad }) => {
+
+    const handleCreateNote = async () => {
+        const data = await createNote()
+        setLoad(!load)
+        console.log(data)
+    }
+
     return (
         <div class="sidebar-sticky">
             <div class="sidebar-header">
-                <h1>Notes <span Style="font-size:14px;color:var(--text-muted);">18</span></h1>
-                <button class="new-note-btn">+ New Note</button>
+                <h1>Notes <span Style={{ fontSize: '14px', color: "var(--text-muted)" }}>18</span></h1>
+                <button onClick={handleCreateNote} class="new-note-btn">+ New Note</button>
             </div>
 
             <input class="search-bar" placeholder="Search notes..." />
@@ -15,7 +23,7 @@ const SidebarSticky = () => {
                 <div class="filter-tab">Personal</div>
                 <div class="filter-tab">Ideas</div>
             </div>
-        </div>
+        </div >
     )
 }
 

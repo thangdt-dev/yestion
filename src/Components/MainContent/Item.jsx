@@ -80,7 +80,7 @@ const Item = ({ id, content, type = 'p', onSave, onEnter, onDeleteEmpty, addItem
             <div ref={wrapperRef} onKeyDown={handleKeyDown} className="block">
                 <input
                     autoFocus
-                    style={style}
+                    Style={style}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                     onSelect={handleSelect}
@@ -147,7 +147,7 @@ const Item = ({ id, content, type = 'p', onSave, onEnter, onDeleteEmpty, addItem
             >
                 +
             </button>
-            <Type style={style} onClick={() => setIsEditing(true)}>{value}</Type>
+            <Type Style={style} onClick={() => setIsEditing(true)}>{value}</Type>
         </div>
     );
 };

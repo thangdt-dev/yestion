@@ -2,8 +2,11 @@ import './App.css';
 import Sidebar from './Layout/Sidebar';
 import MainContent from './Layout/MainContent';
 import ThemeToggle from './Components/Features/ThemeToggle ';
+import { useState } from 'react';
 
 function App() {
+  const [note, setNode] = useState(null)
+
   return (
     <div class="app">
 
@@ -13,9 +16,9 @@ function App() {
         <Sidebar />
 
         {/* <!-- EDITOR --> */}
-        <MainContent />
+        <MainContent note={18} />
 
-        {/* Fixed */}
+        {/* Fixed Theme*/}
         <ThemeToggle />
       </div>
     </div>
