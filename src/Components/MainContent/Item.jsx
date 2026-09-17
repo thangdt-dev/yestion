@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import useClickOutside from "../../Hooks/useClickOutside";
 
 const Item = ({ id, content, type = 'p', onSave, onEnter, onDeleteEmpty, addItem }) => {
